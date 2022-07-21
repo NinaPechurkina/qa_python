@@ -22,7 +22,10 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Гордость и предубеждение и зомби')
 
-        assert (len(collector.get_books_rating()) == 2) == False
+        books_rating = collector.get_books_rating()
+
+        assert len(books_rating) == 1
+        assert not len(collector.get_books_rating()) == 2
 
     def test_add_new_book_set_book_rating(self):
         collector = BooksCollector()
@@ -35,7 +38,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.set_book_rating('Mur-mur', 10)
 
-        assert collector.set_book_rating != 10
+        assert len(collector.get_books_rating()) == 0
 
     def test_add_new_book_rating_0(self):
         collector = BooksCollector()
@@ -96,6 +99,7 @@ class TestBooksCollector:
     def test_add_new_book_delete_book_from_favorites(self):
         collector = BooksCollector()
         collector.add_new_book('Mur-mur')
+        collector.add_book_in_favorites('Mur-mur')
         collector.delete_book_from_favorites('Mur-mur')
 
         assert len(collector.get_list_of_favorites_books()) == 0
